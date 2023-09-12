@@ -38,11 +38,12 @@ public class FileDownloadService {
             String fileName = files[i].getName();
 
             BasicFileAttributes fileAttributes =
-                    Files.readAttributes(Path.of(folder + "/" + fileName), BasicFileAttributes.class);;
+                    Files.readAttributes(Path.of(folder + "/" + fileName), BasicFileAttributes.class);
 
             FileModel fileModel = new FileModel(
                     fileName,
                     "http://10.0.13.131:8081/api/v1/files/download/" + fileName,
+                    fileAttributes.size(),
                     LocalDateTime.ofInstant(fileAttributes.creationTime().toInstant(), ZoneOffset.UTC)
             );
 

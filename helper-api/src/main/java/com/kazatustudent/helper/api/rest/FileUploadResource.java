@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 @Controller
 public class FileUploadResource implements FileUploadResourceContract {
@@ -24,7 +26,7 @@ public class FileUploadResource implements FileUploadResourceContract {
 
         Path root = Path.of("content");
 
-        Files.copy(file.getInputStream(), root.resolve(file.getOriginalFilename()));
+        Files.copy(file.getInputStream(), root.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
 
         return "redirect:/api/v1/files/download";
     }
