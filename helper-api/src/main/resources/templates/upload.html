@@ -5,11 +5,9 @@
     <title>UploadFile</title>
 </head>
 <body>
-<form method="post">
-    <input type="file">
-
-    <label rel="submit">Submit</label>
-    <input id="submit" type="submit">
+<form method="post" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="file">
+    <input id="submit" type="submit" value="submit">
 </form>
 </body>
 </html>

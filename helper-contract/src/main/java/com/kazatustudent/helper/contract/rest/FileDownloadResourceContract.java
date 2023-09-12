@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-@RequestMapping("api/v1/files/download")
+@RequestMapping("/api/v1/files/download")
 public interface FileDownloadResourceContract {
 
     @GetMapping
     List<FileModel> getFiles();
 
-    @GetMapping("{fileName}")
+    @GetMapping("/{fileName}")
     ResponseEntity<Resource> downloadFile(@PathVariable String fileName) throws FileNotFoundException;
 
 }
