@@ -1,4 +1,4 @@
-package com.kazatustudent.helper.api.controller;
+package com.kazatustudent.helper.api.rest;
 
 import com.kazatustudent.helper.contract.rest.FileUploadResourceContract;
 import org.springframework.http.MediaType;
@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -23,9 +21,11 @@ public class FileUploadResource implements FileUploadResourceContract {
 
     @Override
     public String uploadFile(MultipartFile file) throws IOException {
-        System.out.println("File " + file.getName() + " uploaded");
-        Path path = Path.of("content");
-        file.transferTo(path); // access denied
+
+        Path root = Path.of("content");
+
+        Files.copy(file.getInputStream(), root.resolve(file.getOriginalFilename()));
+
         return "redirect:/api/v1/files/download";
     }
 }

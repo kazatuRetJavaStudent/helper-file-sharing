@@ -8,8 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +28,11 @@ public class FileDownloadService {
 
         for (int i = 0; i < fileModels.length; i++) {
             String fileName = files[i].getName();
-            FileModel fileModel = new FileModel(fileName, "http://10.0.13.131:8081/api/v1/files/download/" + fileName);
+
+            FileModel fileModel = new FileModel(
+                    fileName,
+                    "http://10.0.13.131:8081/api/v1/files/download/" + fileName
+            );
             fileModels[i] = fileModel;
         }
 
