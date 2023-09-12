@@ -4,7 +4,6 @@ import com.kazatustudent.helper.contract.rest.FileDeleteResourceContract;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
