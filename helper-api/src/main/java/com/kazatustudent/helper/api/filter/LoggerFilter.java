@@ -17,7 +17,7 @@ public class LoggerFilter extends HttpFilter {
                             HttpServletResponse response,
                             FilterChain chain) throws IOException, ServletException {
 
-        log.info("{} {}", request.getRequestURI(), request.getMethod());
+        log.info("from: {}, uri: {}, method: {}", request.getRemoteAddr(), request.getRequestURI(), request.getMethod());
 
         chain.doFilter(request, response);
     }
