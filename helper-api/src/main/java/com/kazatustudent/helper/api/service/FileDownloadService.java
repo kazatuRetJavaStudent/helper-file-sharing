@@ -1,6 +1,8 @@
 package com.kazatustudent.helper.api.service;
 
+import com.kazatustudent.helper.api.config.ApplicationConfig;
 import com.kazatustudent.helper.contract.model.FileModel;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -20,9 +23,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class FileDownloadService {
 
     private final File folder = new File("content");
+    private final ApplicationConfig config;
 
     @SneakyThrows
     public List<FileModel> getFiles() {
@@ -36,9 +41,11 @@ public class FileDownloadService {
             BasicFileAttributes fileAttributes =
                     Files.readAttributes(Path.of(folder + "/" + fileName), BasicFileAttributes.class);
 
+
+
             FileModel fileModel = new FileModel(
                     fileName,
-                    "http://10.0.13.131:8081/api/v1/files/download/" + fileName,
+                    "http://" + InetAddress.getLocalHost().getHostAddress()  + ":" + config.getServerPort() + "/api/v1/files/download/" + fileName,
                     fileAttributes.size(),
                     LocalDateTime.ofInstant(fileAttributes.creationTime().toInstant(), ZoneOffset.UTC)
             );
