@@ -10,6 +10,6 @@ import java.time.LocalDateTime;
 public class FileModel {
     private String fileName;
     private String url;
-
-//    private LocalDateTime uploadTime;
+    private Long size;
+    private LocalDateTime uploadTime;
 }
