@@ -4,6 +4,7 @@ import com.kazatustudent.helper.api.service.FileDownloadService;
 import com.kazatustudent.helper.contract.model.FileModel;
 import com.kazatustudent.helper.contract.rest.FileDownloadResourceContract;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

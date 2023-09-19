@@ -6,13 +6,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.InetAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,8 +40,6 @@ public class FileDownloadService {
             BasicFileAttributes fileAttributes =
                     Files.readAttributes(Path.of(folder + "/" + fileName), BasicFileAttributes.class);
 
-
-
             FileModel fileModel = new FileModel(
                     fileName,
                     "http://" + InetAddress.getLocalHost().getHostAddress()  + ":" + config.getServerPort() + "/api/v1/files/download/" + fileName,
@@ -67,6 +64,10 @@ public class FileDownloadService {
 
         return ResponseEntity.ok()
                 .contentLength(file.length())
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + resource.getFilename() + "\""
+                )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }
