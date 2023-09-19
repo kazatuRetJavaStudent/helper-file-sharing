@@ -66,7 +66,7 @@ public class FileDownloadService {
                 .contentLength(file.length())
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + resource.getFilename() + "\""
+                        "attachment; filename=\"" + fileName + "\""
                 )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
