@@ -3,8 +3,8 @@ server:
 
 app:
   host:
-    name: ${HELPER_FILE_SHARING:file-sharing.kazatu.kz}
-    protocol: http
+    name: ${HELPER_FILE_SHARING_HOST_NAME:file-sharing.kazatu.kz}
+    protocol: ${HELPER_FILE_SHARING_HOST_PROTOCOL:http}
 
 spring:
   servlet:
