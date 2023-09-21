@@ -2,6 +2,7 @@ server:
   port: 80
 
 app:
+  folder: ${HELPER_FILE_SHARING_CONTENT_FOLDER:content}
   host:
     name: ${HELPER_FILE_SHARING_HOST_NAME:file-sharing.kazatu.kz}
     protocol: ${HELPER_FILE_SHARING_HOST_PROTOCOL:http}

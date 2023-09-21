@@ -2,6 +2,7 @@ package com.kazatustudent.helper.api.service;
 
 import com.kazatustudent.helper.api.config.ApplicationConfig;
 import com.kazatustudent.helper.contract.model.FileModel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.core.io.InputStreamResource;
@@ -25,20 +26,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FileDownloadService {
 
-    private final File folder = new File("content");
     private final ApplicationConfig config;
 
     @SneakyThrows
     public List<FileModel> getFiles() {
-        File[] files = folder.listFiles();
+        File[] files = config.getFolder().listFiles();
 
         FileModel[] fileModels = new FileModel[files.length];
 
         for (int i = 0; i < fileModels.length; i++) {
             String fileName = files[i].getName();
 
-            BasicFileAttributes fileAttributes =
-                    Files.readAttributes(Path.of(folder + "/" + fileName), BasicFileAttributes.class);
+            BasicFileAttributes fileAttributes = readFileAttributes(fileName);
 
             FileModel fileModel = new FileModel(
                     fileName,
@@ -58,7 +57,7 @@ public class FileDownloadService {
     }
 
     public ResponseEntity<Resource> getFileAsInputStreamResource(String fileName) throws FileNotFoundException {
-        File file = new File(folder + "/" + fileName);
+        File file = new File(config.getFolder() + "/" + fileName);
 
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 
@@ -70,5 +69,10 @@ public class FileDownloadService {
                 )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
+    }
+
+    @SneakyThrows
+    protected BasicFileAttributes readFileAttributes(String fileName) {
+        return Files.readAttributes(Path.of(config.getFolder() + "/" + fileName), BasicFileAttributes.class);
     }
 }
