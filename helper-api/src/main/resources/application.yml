@@ -1,6 +1,11 @@
 server:
   port: 80
 
+app:
+  host:
+    name: ${HELPER_FILE_SHARING:file-sharing.kazatu.kz}
+    protocol: http
+
 spring:
   servlet:
     multipart:
