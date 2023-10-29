@@ -11,5 +11,5 @@ spring:
   servlet:
     multipart:
       enabled: true
-      max-file-size: ${HELPER_FILE_SHARING_MAX_FILE_SIZE:100MB}
-      max-request-size: ${HELPER_FILE_SHARING_MAX_REQUEST_SIZE:100MB}
+      max-file-size: ${HELPER_FILE_SHARING_MAX_FILE_SIZE:10GB}
+      max-request-size: ${HELPER_FILE_SHARING_MAX_REQUEST_SIZE:10GB}

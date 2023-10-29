@@ -21,15 +21,26 @@
     <properties>
 		<java.version>11</java.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>3.1.5</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
 		</dependency>
 	</dependencies>
 
@@ -45,6 +56,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+<!--					<mainClass>com.kazatustudent.helper.Application</mainClass>-->
 				</configuration>
 			</plugin>
 		</plugins>
